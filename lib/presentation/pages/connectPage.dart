@@ -1,4 +1,5 @@
 import 'package:file_ground_front/presentation/atomic/texts.dart';
+import 'package:file_ground_front/presentation/components/numpad.dart';
 import 'package:flutter/material.dart';
 
 import '../atomic/paddings.dart';
@@ -20,6 +21,7 @@ class ConnectPage extends StatelessWidget {
             color: color.onBackground,
           ),
         ),
+        body: Numpad(),
       ),
     );
   }

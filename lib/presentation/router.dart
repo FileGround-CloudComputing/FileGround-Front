@@ -10,7 +10,7 @@ final router = GoRouter(
     GoRoute(
       path: '/',
       pageBuilder: (context, state) => CustomTransitionPage(
-        child: MainPage(),
+        child: ConnectPage(),
         transitionDuration: Duration(milliseconds: 100),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(

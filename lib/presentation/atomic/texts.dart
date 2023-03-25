@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class TitleText extends StatelessWidget {
   final String text;
   final Color color;
+  final double fontSize;
   const TitleText(
     this.text, {
     Key? key,
     required this.color,
+    this.fontSize = 26,
   }) : super(key: key);
 
   @override
@@ -15,7 +17,7 @@ class TitleText extends StatelessWidget {
       text,
       style: TextStyle(
         fontWeight: FontWeight.w700,
-        fontSize: 26,
+        fontSize: fontSize,
         color: color,
       ),
     );
@@ -25,10 +27,12 @@ class TitleText extends StatelessWidget {
 class DescriptionText extends StatelessWidget {
   final String text;
   final Color color;
+  final double? fontSize;
   const DescriptionText(
     this.text, {
     Key? key,
     required this.color,
+    this.fontSize,
   }) : super(key: key);
 
   @override
@@ -38,6 +42,7 @@ class DescriptionText extends StatelessWidget {
       style: TextStyle(
         fontWeight: FontWeight.w200,
         color: color,
+        fontSize: fontSize,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:file_ground_front/presentation/atomic/containers.dart';
 import 'package:file_ground_front/presentation/components/customAppBar.dart';
 import 'package:file_ground_front/presentation/components/iconTitleDesc.dart';
+import 'package:file_ground_front/presentation/pages/connectPage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,6 +9,15 @@ import '../atomic/paddings.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
+
+  void pushConnectPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ConnectPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +48,7 @@ class MainPage extends StatelessWidget {
             RoundedSurfaceInk(
               width: double.infinity,
               onTap: () {
-                context.push('/connect');
+                pushConnectPage(context);
               },
               child: const IconTitleDesc(
                 icon: Icons.connect_without_contact,
