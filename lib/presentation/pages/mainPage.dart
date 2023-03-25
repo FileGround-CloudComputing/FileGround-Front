@@ -2,6 +2,9 @@ import 'package:file_ground_front/presentation/atomic/containers.dart';
 import 'package:file_ground_front/presentation/components/customAppBar.dart';
 import 'package:file_ground_front/presentation/components/iconTitleDesc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../atomic/paddings.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -9,8 +12,8 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
+    return Padding(
+      padding: getPagePadding(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: CustomAppBar(
@@ -34,7 +37,9 @@ class MainPage extends StatelessWidget {
             ),
             RoundedSurfaceInk(
               width: double.infinity,
-              onTap: () {},
+              onTap: () {
+                context.push('/connect');
+              },
               child: const IconTitleDesc(
                 icon: Icons.connect_without_contact,
                 title: '그라운드 접속하기',
