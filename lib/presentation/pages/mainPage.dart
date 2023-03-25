@@ -8,8 +8,9 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
+      padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: CustomAppBar(
@@ -17,14 +18,41 @@ class MainPage extends StatelessWidget {
             IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
           ],
         ),
-        body: const RoundedSurfaceContainer(
-          width: double.infinity,
-          height: 300,
-          child: IconTitleDesc(
-            icon: Icons.abc,
-            title: '그라운드 만들기',
-            description: 'Ground를 만들어 파일을 공유해보세요',
-          ),
+        body: Column(
+          children: [
+            RoundedSurfaceInk(
+              width: double.infinity,
+              onTap: () {},
+              child: const IconTitleDesc(
+                icon: Icons.coffee_maker,
+                title: '그라운드 만들기',
+                description: 'Ground를 만들어 공유를 시작해보세요.',
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            RoundedSurfaceInk(
+              width: double.infinity,
+              onTap: () {},
+              child: const IconTitleDesc(
+                icon: Icons.connect_without_contact,
+                title: '그라운드 접속하기',
+                description: 'Ground에 접속해서 공유를 시작해보세요.',
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            RoundedSurfaceInk(
+              width: double.infinity,
+              onTap: () {},
+              child: const IconTitleDesc(
+                icon: Icons.coffee,
+                title: '생성 내역',
+              ),
+            ),
+          ],
         ),
       ),
     );

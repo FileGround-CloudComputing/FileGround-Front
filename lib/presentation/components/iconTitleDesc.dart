@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 class IconTitleDesc extends StatelessWidget {
   final IconData icon;
   final String title;
-  final String description;
+  final String? description;
   const IconTitleDesc({
     Key? key,
     required this.icon,
     required this.title,
-    required this.description,
+    this.description,
   }) : super(key: key);
 
   @override
@@ -23,6 +23,7 @@ class IconTitleDesc extends StatelessWidget {
           width: 8,
         ),
         Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -30,10 +31,11 @@ class IconTitleDesc extends StatelessWidget {
               title,
               color: color.onSurface,
             ),
-            DescriptionText(
-              description,
-              color: color.onSurfaceVariant,
-            ),
+            if (description != null)
+              DescriptionText(
+                description!,
+                color: color.onSurfaceVariant,
+              ),
           ],
         ),
       ],
