@@ -12,7 +12,7 @@ class Numpad extends StatefulWidget {
 }
 
 class _NumpadState extends State<Numpad> {
-  String currentNums = '123';
+  String currentNums = '';
   bool isError = false;
   void handleNumInput(String num) {
     if (currentNums.length == 6) {
@@ -40,14 +40,17 @@ class _NumpadState extends State<Numpad> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          NumpadViewer(
-            currentNums: currentNums,
-            isError: isError,
+          Expanded(
+            child: Center(
+              child: NumpadViewer(
+                currentNums: currentNums,
+                isError: isError,
+              ),
+            ),
           ),
-          const Spacer(),
           SizedBox(
             width: 300,
-            height: 700,
+            height: 400,
             child: GridView.count(
               crossAxisCount: 3,
               children: [
