@@ -1,5 +1,8 @@
+import 'package:file_ground_front/domain/models/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+
+import 'photo.dart';
 part 'ground.g.dart';
 part 'ground.freezed.dart';
 
@@ -7,9 +10,12 @@ part 'ground.freezed.dart';
 class Ground with _$Ground {
   const factory Ground({
     required int id,
+    required String coordinate,
     required String title,
-    required String maker,
-    required String accessToken,
+    required User maker,
+    @Default([]) List<Photo> photos,
+    @Default([]) List<User> currentPeople,
+    required String expiresIn,
   }) = _Ground;
 
   factory Ground.fromJson(Map<String, dynamic> json) => _$GroundFromJson(json);
