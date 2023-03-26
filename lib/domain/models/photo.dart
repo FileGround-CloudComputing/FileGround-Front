@@ -14,6 +14,7 @@ class Photo with _$Photo {
     required String thumbnail,
     required String uploadedAt,
     @Default(false) bool isDownloaded,
+    @Default(false) bool isUploaded,
   }) = _Photo;
 
   factory Photo.fromJson(Map<String, dynamic> json) => _$PhotoFromJson(json);

@@ -13,9 +13,9 @@ class Ground with _$Ground {
     required String coordinate,
     required String title,
     required User maker,
+    required String expiresIn,
     @Default([]) List<Photo> photos,
     @Default([]) List<User> currentPeople,
-    required String expiresIn,
   }) = _Ground;
 
   factory Ground.fromJson(Map<String, dynamic> json) => _$GroundFromJson(json);
