@@ -1,3 +1,4 @@
+import 'package:file_ground_front/application/dto/authDto.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../domain/models/session.dart';
@@ -9,11 +10,11 @@ abstract class AuthRepository {
   Future<Result<String>> getAuthUrlWithNaver();
 
   /// Sign out
-  Future<void> signOut();
+  Future<void> signOut(Session session);
 
-  Future<Result<String>> renewAccessToken();
+  Future<Result<AccessTokenDto>> renewAccessToken(Session session);
 
-  Future<Result<String>> renewRefreshToken();
+  Future<Result<Session>> renewRefreshToken();
 
   Future<void> saveSession(Session session);
 
