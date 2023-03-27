@@ -1,9 +1,8 @@
-import 'package:file_ground_front/presentation/atomic/buttons.dart';
-import 'package:file_ground_front/presentation/atomic/texts.dart';
 import 'package:file_ground_front/presentation/viewModels/connect/connectViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../common/atomic/buttons.dart';
 import 'numpadViewer.dart';
 
 class Numpad extends ConsumerWidget {
@@ -15,17 +14,13 @@ class Numpad extends ConsumerWidget {
         ref.read(connectViewModelProvider.notifier).handleNumInput;
     final handleRemove =
         ref.read(connectViewModelProvider.notifier).handleRemove;
-    final connectState = ref.watch(connectViewModelProvider);
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
+          const Expanded(
             child: Center(
-              child: NumpadViewer(
-                currentNums: connectState.currentNums,
-                isError: connectState.isError,
-              ),
+              child: NumpadViewer(),
             ),
           ),
           SizedBox(
@@ -38,14 +33,14 @@ class Numpad extends ConsumerWidget {
                   NumpadButton(
                     num: num.toString(),
                     onPressed: () {
-                      handleNumInput(num: num.toString(), context: context);
+                      handleNumInput(num: num.toString());
                     },
                   ),
                 const SizedBox(),
                 NumpadButton(
                   num: '0',
                   onPressed: () {
-                    handleNumInput(num: '0', context: context);
+                    handleNumInput(num: '0');
                   },
                 ),
                 NumpadRemoveButton(

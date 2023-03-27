@@ -1,6 +1,7 @@
+import 'package:file_ground_front/presentation/common/atomic/texts.dart';
 import 'package:flutter/material.dart';
-
-import '../atomic/texts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../viewModels/connect/connectViewModel.dart';
 
 class NumpadCharContainer extends StatelessWidget {
   final String? ch;
@@ -44,24 +45,21 @@ String? getCh(String s, int idx) {
   }
 }
 
-class NumpadViewerContent extends StatelessWidget {
-  final String currentNums;
-  final bool isError;
+class NumpadViewerContent extends ConsumerWidget {
   const NumpadViewerContent({
     Key? key,
-    required this.currentNums,
-    required this.isError,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final connectState = ref.watch(connectViewModelProvider);
     final color = Theme.of(context).colorScheme;
     final List<Widget> views = [];
     for (int idx = 0; idx < 6; idx += 1) {
       views.add(
         NumpadCharContainer(
-          isError: isError,
-          ch: getCh(currentNums, idx),
+          isError: connectState.isError,
+          ch: getCh(connectState.currentNums, idx),
         ),
       );
     }
@@ -106,21 +104,16 @@ class ShakeWidget extends StatelessWidget {
   }
 }
 
-class NumpadViewer extends StatelessWidget {
-  final String currentNums;
-  final bool isError;
+class NumpadViewer extends ConsumerWidget {
   const NumpadViewer({
     Key? key,
-    required this.currentNums,
-    required this.isError,
   }) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isError =
+        ref.watch(connectViewModelProvider.select((value) => value.isError));
     final color = Theme.of(context).colorScheme;
-    final Widget content = NumpadViewerContent(
-      currentNums: currentNums,
-      isError: isError,
-    );
+    final Widget content = const NumpadViewerContent();
     return Container(
       decoration: BoxDecoration(
         border: Border.fromBorderSide(

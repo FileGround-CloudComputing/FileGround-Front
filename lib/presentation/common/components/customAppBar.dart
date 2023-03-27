@@ -1,5 +1,6 @@
-import 'package:file_ground_front/presentation/atomic/texts.dart';
 import 'package:flutter/material.dart';
+
+import '../atomic/texts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;

@@ -1,6 +1,7 @@
-import 'package:file_ground_front/presentation/atomic/icons.dart';
-import 'package:file_ground_front/presentation/atomic/texts.dart';
 import 'package:flutter/material.dart';
+
+import '../atomic/icons.dart';
+import '../atomic/texts.dart';
 
 class IconTitleDesc extends StatelessWidget {
   final IconData icon;

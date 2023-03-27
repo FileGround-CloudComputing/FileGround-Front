@@ -1,11 +1,11 @@
-import 'package:file_ground_front/presentation/atomic/containers.dart';
-import 'package:file_ground_front/presentation/components/customAppBar.dart';
-import 'package:file_ground_front/presentation/components/iconTitleDesc.dart';
-import 'package:file_ground_front/presentation/pages/connectPage.dart';
+import 'package:file_ground_front/presentation/connect/connectPage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../atomic/paddings.dart';
+import '../common/atomic/containers.dart';
+import '../common/atomic/paddings.dart';
+import '../common/components/customAppBar.dart';
+import '../common/components/iconTitleDesc.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);

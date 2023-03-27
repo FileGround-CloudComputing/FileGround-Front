@@ -1,4 +1,4 @@
-import 'package:file_ground_front/presentation/pages/connectPage.dart';
+import 'package:file_ground_front/presentation/connect/connectPage.dart';
 import 'package:file_ground_front/presentation/pages/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

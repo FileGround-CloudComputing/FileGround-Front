@@ -8,11 +8,7 @@ class ConnectViewModel extends StateNotifier<ConnectState> {
   Ref ref;
   ConnectViewModel({required this.ref}) : super(const ConnectState());
 
-  // TODO error or error message
-  void handleNumInput({
-    required String num,
-    required BuildContext context,
-  }) async {
+  void handleNumInput({required String num}) async {
     if (state.currentNums.length < 6) {
       state = state.copyWith(
         currentNums: state.currentNums + num,

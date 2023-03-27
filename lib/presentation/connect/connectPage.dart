@@ -1,8 +1,7 @@
-import 'package:file_ground_front/presentation/atomic/texts.dart';
-import 'package:file_ground_front/presentation/components/numpad.dart';
+import 'package:file_ground_front/presentation/common/atomic/paddings.dart';
+import 'package:file_ground_front/presentation/common/atomic/texts.dart';
+import 'package:file_ground_front/presentation/connect/numpad.dart';
 import 'package:flutter/material.dart';
-
-import '../atomic/paddings.dart';
 
 class ConnectPage extends StatelessWidget {
   const ConnectPage({Key? key}) : super(key: key);
