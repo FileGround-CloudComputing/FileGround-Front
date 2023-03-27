@@ -20,3 +20,13 @@ class Ground with _$Ground {
 
   factory Ground.fromJson(Map<String, dynamic> json) => _$GroundFromJson(json);
 }
+
+@freezed
+class Grounds with _$Grounds {
+  const factory Grounds({
+    @Default([]) List<Ground> grounds,
+  }) = _Grounds;
+
+  factory Grounds.fromJson(Map<String, dynamic> json) =>
+      _$GroundsFromJson(json);
+}

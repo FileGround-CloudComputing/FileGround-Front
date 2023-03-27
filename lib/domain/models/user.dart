@@ -12,7 +12,6 @@ class User with _$User {
   const factory User({
     required int id,
     required String name,
-    @Default([]) List<Ground> grounds,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
