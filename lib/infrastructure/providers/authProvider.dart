@@ -1,11 +1,11 @@
 import 'package:file_ground_front/application/ports/authRepository.dart';
 import 'package:file_ground_front/application/usecases/authUseCase.dart';
-import 'package:file_ground_front/infrastructure/dataSources/remote/secureStorageProvider.dart';
 import 'package:file_ground_front/infrastructure/dio/dioProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/models/session.dart';
 import '../adapters/authRepositoryImpl.dart';
+import '../dataSources/local/secureStorageProvider.dart';
 
 final authProvider = StateNotifierProvider<AuthUseCase, Session?>((Ref ref) {
   final dio = ref.watch(dioProvider);
