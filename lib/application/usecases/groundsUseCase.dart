@@ -31,10 +31,10 @@ class GroundUseCase extends StateNotifier<Grounds> {
   }
 
   Future<void> addGround(Ground ground) async {
-    final result = await groundRepository.removeGround(ground);
+    final result = await groundRepository.addGround(ground);
     result.when(
-      success: (value) {
-        loadGrounds();
+      success: (Ground ground) {
+        state = state.copyWith(grounds: [...state.grounds, ground]);
       },
       error: (e) {},
     );
