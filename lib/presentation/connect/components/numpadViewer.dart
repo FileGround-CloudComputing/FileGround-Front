@@ -1,6 +1,7 @@
 import 'package:file_ground_front/presentation/common/atomic/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../common/animations/shakeWidget.dart';
 import '../connectViewModel.dart';
 
 class NumpadCharContainer extends StatelessWidget {
@@ -71,39 +72,6 @@ class NumpadViewerContent extends ConsumerWidget {
   }
 }
 
-class ShakeWidget extends StatelessWidget {
-  final Duration duration;
-  final double deltaX;
-  final Widget child;
-  final Curve curve;
-
-  const ShakeWidget({
-    Key? key,
-    this.duration = const Duration(milliseconds: 500),
-    this.deltaX = 20,
-    this.curve = Curves.bounceOut,
-    required this.child,
-  }) : super(key: key);
-
-  /// convert 0-1 to 0-1-0
-  double shake(double animation) =>
-      2 * (0.5 - (0.5 - curve.transform(animation)).abs());
-
-  @override
-  Widget build(BuildContext context) {
-    return TweenAnimationBuilder<double>(
-      key: key,
-      tween: Tween(begin: 0.0, end: 1.0),
-      duration: duration,
-      builder: (context, animation, child) => Transform.translate(
-        offset: Offset(deltaX * shake(animation), 0),
-        child: child,
-      ),
-      child: child,
-    );
-  }
-}
-
 class NumpadViewer extends ConsumerWidget {
   const NumpadViewer({
     Key? key,
@@ -113,23 +81,29 @@ class NumpadViewer extends ConsumerWidget {
     final isError =
         ref.watch(connectViewModelProvider.select((value) => value.isError));
     final color = Theme.of(context).colorScheme;
-    final Widget content = const NumpadViewerContent();
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.fromBorderSide(
-          BorderSide(
-            color: color.primary,
+    const Widget content = NumpadViewerContent();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            border: Border.fromBorderSide(
+              BorderSide(
+                color: color.primary,
+              ),
+            ),
+            borderRadius: BorderRadius.circular(
+              16,
+            ),
           ),
+          child: isError
+              ? const ShakeWidget(
+                  child: content,
+                )
+              : content,
         ),
-        borderRadius: BorderRadius.circular(
-          16,
-        ),
-      ),
-      child: isError
-          ? ShakeWidget(
-              child: content,
-            )
-          : content,
+        if (isError) DescriptionText('잘못된 좌표입니다.', color: color.error)
+      ],
     );
   }
 }
