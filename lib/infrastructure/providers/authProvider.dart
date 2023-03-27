@@ -7,10 +7,13 @@ import '../../domain/models/session.dart';
 import '../adapters/authRepositoryImpl.dart';
 import '../dataSources/local/secureStorageProvider.dart';
 
-final authProvider = StateNotifierProvider<AuthUseCase, Session?>((Ref ref) {
+final authUseCaseProvider =
+    StateNotifierProvider<AuthUseCase, Session?>((Ref ref) {
   final dio = ref.watch(dioProvider);
   final secureStorage = ref.watch(secureStorageProvider);
   AuthRepositoryImpl authRepository =
       AuthRepositoryImpl(dio: dio, secureStorage: secureStorage);
-  return AuthUseCase(authRepository: authRepository);
+  final notifier = AuthUseCase(authRepository: authRepository);
+  notifier.init();
+  return notifier;
 });

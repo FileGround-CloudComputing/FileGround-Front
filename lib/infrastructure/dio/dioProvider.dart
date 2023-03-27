@@ -12,8 +12,8 @@ final dioProvider = Provider<Dio>((Ref ref) {
 });
 
 final dioAuthProvider = Provider<Dio>((Ref ref) {
-  final session = ref.watch(authProvider);
-  final authUseCase = ref.read(authProvider.notifier);
+  final session = ref.watch(authUseCaseProvider);
+  final authUseCase = ref.read(authUseCaseProvider.notifier);
   final dio = Dio(BaseOptions(
     baseUrl: '',
     connectTimeout: const Duration(seconds: 5),

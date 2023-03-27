@@ -1,41 +1,21 @@
 import 'package:file_ground_front/presentation/atomic/buttons.dart';
 import 'package:file_ground_front/presentation/atomic/texts.dart';
+import 'package:file_ground_front/presentation/viewModels/connect/connectViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'numpadViewer.dart';
 
-class Numpad extends StatefulWidget {
+class Numpad extends ConsumerWidget {
   const Numpad({Key? key}) : super(key: key);
 
   @override
-  State<Numpad> createState() => _NumpadState();
-}
-
-class _NumpadState extends State<Numpad> {
-  String currentNums = '';
-  bool isError = false;
-  void handleNumInput(String num) {
-    if (currentNums.length == 6) {
-      setState(() {
-        isError = true;
-      });
-      return;
-    }
-    setState(() {
-      currentNums = currentNums + num;
-      isError = false;
-    });
-  }
-
-  void handleRemove() {
-    setState(() {
-      currentNums = currentNums.substring(0, currentNums.length - 1);
-      isError = false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final handleNumInput =
+        ref.read(connectViewModelProvider.notifier).handleNumInput;
+    final handleRemove =
+        ref.read(connectViewModelProvider.notifier).handleRemove;
+    final connectState = ref.watch(connectViewModelProvider);
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,8 +23,8 @@ class _NumpadState extends State<Numpad> {
           Expanded(
             child: Center(
               child: NumpadViewer(
-                currentNums: currentNums,
-                isError: isError,
+                currentNums: connectState.currentNums,
+                isError: connectState.isError,
               ),
             ),
           ),
@@ -58,14 +38,14 @@ class _NumpadState extends State<Numpad> {
                   NumpadButton(
                     num: num.toString(),
                     onPressed: () {
-                      handleNumInput(num.toString());
+                      handleNumInput(num: num.toString(), context: context);
                     },
                   ),
                 const SizedBox(),
                 NumpadButton(
                   num: '0',
                   onPressed: () {
-                    handleNumInput('0');
+                    handleNumInput(num: '0', context: context);
                   },
                 ),
                 NumpadRemoveButton(

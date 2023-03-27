@@ -6,7 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/models/user.dart';
 import '../dio/dioProvider.dart';
 
-final authProvider = StateNotifierProvider<UserUseCase, User?>((Ref ref) {
+final userUseCaseProvider =
+    StateNotifierProvider<UserUseCase, User?>((Ref ref) {
   final dioAuth = ref.watch(dioAuthProvider);
   UserRepository userRepository = UserRepositoryImpl(dioAuth: dioAuth);
   final notifier = UserUseCase(userRepository: userRepository);
