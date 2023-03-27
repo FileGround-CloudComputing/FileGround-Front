@@ -1,4 +1,5 @@
 import 'package:file_ground_front/application/ports/authRepository.dart';
+import 'package:file_ground_front/domain/failure/failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../domain/models/session.dart';
@@ -18,14 +19,16 @@ class AuthUseCase extends StateNotifier<Session?> {
     return await authRepository.getAuthUrlWithNaver();
   }
 
-  Future<void> renewAccessToken() async {
+  Future<Result<bool>> renewAccessToken() async {
     final result = await authRepository.renewAccessToken();
-    result.when(
+    return result.when(
       success: (String accessToken) {
         state = state?.copyWith(accessToken: accessToken);
+        return const Result.success(true);
       },
       error: (e) {
         signOut();
+        return const Result.error(Failure.unauthorized());
       },
     );
   }
