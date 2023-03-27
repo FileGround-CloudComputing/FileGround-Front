@@ -12,7 +12,6 @@ class User with _$User {
   const factory User({
     required int id,
     required String name,
-    Session? session,
     @Default([]) List<Ground> grounds,
   }) = _User;
 
