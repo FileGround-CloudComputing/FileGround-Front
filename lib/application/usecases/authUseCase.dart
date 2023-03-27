@@ -18,6 +18,16 @@ class AuthUseCase extends StateNotifier<Session?> {
     return await authRepository.getAuthUrlWithNaver();
   }
 
+  Future<void> renewAccessToken() async {
+    final result = await authRepository.renewAccessToken();
+    result.when(
+      success: (String accessToken) {
+        state = state?.copyWith(accessToken: accessToken);
+      },
+      error: (e) {},
+    );
+  }
+
   Future<void> signOut() async {
     return await authRepository.signOut();
   }

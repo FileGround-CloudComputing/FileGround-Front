@@ -15,11 +15,6 @@ abstract class AuthRepository {
 
   Future<Result<String>> renewRefreshToken();
 
-  /// Listen to auth changes
-  void authStateChange(
-    void Function(User? user) callback,
-  );
-
   Future<void> saveSession(Session session);
 
   Future<Result<Session>> loadSession();
