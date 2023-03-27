@@ -1,8 +1,8 @@
 import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
+import 'package:file_ground_front/presentation/connect/states/connectState.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../domain/models/ground.dart';
-import 'connectState.dart';
 
 class ConnectViewModel extends StateNotifier<ConnectState> {
   Ref ref;

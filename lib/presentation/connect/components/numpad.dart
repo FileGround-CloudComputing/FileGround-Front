@@ -1,8 +1,8 @@
-import 'package:file_ground_front/presentation/viewModels/connect/connectViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../common/atomic/buttons.dart';
+import '../../common/atomic/buttons.dart';
+import '../connectViewModel.dart';
 import 'numpadViewer.dart';
 
 class Numpad extends ConsumerWidget {

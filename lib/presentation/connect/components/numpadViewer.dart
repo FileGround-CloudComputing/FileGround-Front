@@ -1,7 +1,7 @@
 import 'package:file_ground_front/presentation/common/atomic/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../viewModels/connect/connectViewModel.dart';
+import '../connectViewModel.dart';
 
 class NumpadCharContainer extends StatelessWidget {
   final String? ch;
