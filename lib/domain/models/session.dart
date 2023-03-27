@@ -10,8 +10,8 @@ class Session with _$Session {
     String? accessToken,
     required String refreshToken,
     @Default("Bearer") String tokenType,
-    String? accessTokenExpiresIn,
-    required String refreshTokenExpiresIn,
+    DateTime? accessTokenExpiresIn,
+    required DateTime refreshTokenExpiresIn,
   }) = _Session;
 
   factory Session.fromJson(Map<String, dynamic> json) =>
