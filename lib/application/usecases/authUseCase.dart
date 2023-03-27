@@ -10,7 +10,7 @@ class AuthUseCase extends StateNotifier<Session?> {
     required this.authRepository,
   }) : super(null);
 
-  void _init() {
+  void init() {
     loadSession();
   }
 
@@ -24,11 +24,14 @@ class AuthUseCase extends StateNotifier<Session?> {
       success: (String accessToken) {
         state = state?.copyWith(accessToken: accessToken);
       },
-      error: (e) {},
+      error: (e) {
+        signOut();
+      },
     );
   }
 
   Future<void> signOut() async {
+    state = null;
     return await authRepository.signOut();
   }
 
