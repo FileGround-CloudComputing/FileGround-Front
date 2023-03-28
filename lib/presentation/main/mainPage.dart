@@ -1,4 +1,5 @@
 import 'package:file_ground_front/presentation/connect/connectPage.dart';
+import 'package:file_ground_front/presentation/main/components/groundsList.dart';
 import 'package:file_ground_front/presentation/main/mainViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -57,9 +58,14 @@ class MainPage extends ConsumerWidget {
             RoundedSurfaceInk(
               width: double.infinity,
               onTap: () {},
-              child: const IconTitleDesc(
-                icon: Icons.coffee,
-                title: '생성 내역',
+              child: Column(
+                children: const [
+                  IconTitleDesc(
+                    icon: Icons.coffee,
+                    title: '생성 내역',
+                  ),
+                  GroundsList(),
+                ],
               ),
             ),
           ],

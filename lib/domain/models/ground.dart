@@ -12,7 +12,7 @@ class Ground with _$Ground {
     required int id,
     required String coordinate,
     required String title,
-    required User maker,
+    User? maker,
     required String expiresIn,
     @Default([]) List<Photo> photos,
     @Default([]) List<User> currentPeople,
@@ -24,7 +24,7 @@ class Ground with _$Ground {
 @freezed
 class Grounds with _$Grounds {
   const factory Grounds({
-    @Default([]) List<Ground> grounds,
+    @Default([]) List<Ground> data,
   }) = _Grounds;
 
   factory Grounds.fromJson(Map<String, dynamic> json) =>

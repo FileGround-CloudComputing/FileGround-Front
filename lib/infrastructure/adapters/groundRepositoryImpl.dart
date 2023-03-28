@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:file_ground_front/application/ports/groundRepository.dart';
 import 'package:file_ground_front/domain/failure/failure.dart';
@@ -60,9 +62,11 @@ class GroundRepositoryImpl extends GroundRepository {
       return const Result.error(Failure.badRequest());
     }
     try {
-      final data = Grounds.fromJson(result.data);
+      print(Ground.fromJson(Map.from(result.data['data'][0])));
+      final data = Grounds.fromJson(Map<String, dynamic>.from(result.data));
       return Result.success(data);
     } catch (e) {
+      print(e.toString());
       return Result.error(Failure.unprocessableEntity(message: e.toString()));
     }
   }
@@ -79,7 +83,7 @@ class GroundRepositoryImpl extends GroundRepository {
     }
     try {
       final data = Photos.fromJson(result.data);
-      return Result.success(data.photos);
+      return Result.success(data.data);
     } catch (e) {
       return Result.error(Failure.unprocessableEntity(message: e.toString()));
     }

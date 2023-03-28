@@ -30,9 +30,8 @@ class GroundsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(mainViewModelProvider.select((value) => value.user));
-    final grounds = ref
-        .watch(mainViewModelProvider.select((value) => value.grounds))
-        .grounds;
+    final grounds =
+        ref.watch(mainViewModelProvider.select((value) => value.grounds)).data;
 
     if (user == null) {
       return const Text('please login');

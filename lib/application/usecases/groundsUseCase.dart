@@ -10,6 +10,9 @@ class GroundUseCase extends StateNotifier<Grounds> {
   GroundUseCase({
     required this.groundRepository,
   }) : super(const Grounds());
+  void init() {
+    loadGrounds();
+  }
 
   Future<void> loadGrounds() async {
     final result = await groundRepository.getGrounds();
@@ -34,7 +37,7 @@ class GroundUseCase extends StateNotifier<Grounds> {
     final result = await groundRepository.addGround(ground);
     result.when(
       success: (Ground ground) {
-        state = state.copyWith(grounds: [...state.grounds, ground]);
+        state = state.copyWith(data: [...state.data, ground]);
       },
       error: (e) {},
     );

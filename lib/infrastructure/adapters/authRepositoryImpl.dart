@@ -48,14 +48,21 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Result<AccessTokenDto>> renewAccessToken(Session session) async {
-    final result = await dio.get(
-      '/auth/access',
-      options: Options(
-        headers: {
-          'a': session.refreshToken,
-        },
-      ),
-    );
+    final Response result;
+    try {
+      result = await dio.get(
+        '/auth/access',
+        options: Options(
+          headers: {
+            'a': session.refreshToken,
+          },
+        ),
+      );
+    } on Failure catch (e) {
+      return Result.error(e);
+    } catch (e) {
+      return Result.error(Failure.unprocessableEntity(message: e.toString()));
+    }
 
     try {
       return Result.success(AccessTokenDto.fromJson(result.data));

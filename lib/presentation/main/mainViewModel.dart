@@ -18,10 +18,6 @@ class MainViewModel extends StateNotifier<MainState> {
     required this.grounds,
   }) : super(MainState(user: user, grounds: grounds));
 
-  void init() {
-    ref.read(groundUseCaseProvider.notifier).loadGrounds();
-  }
-
   void pushConnectPage(BuildContext context) {
     Navigator.push(
       context,
@@ -37,7 +33,6 @@ final mainViewModelProvider = StateNotifierProvider<MainViewModel, MainState>(
     final user = ref.watch(userUseCaseProvider);
     final grounds = ref.watch(groundUseCaseProvider);
     final notifier = MainViewModel(ref: ref, grounds: grounds, user: user);
-    notifier.init();
     return notifier;
   },
 );

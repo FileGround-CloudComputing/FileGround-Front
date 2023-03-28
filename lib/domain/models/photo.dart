@@ -23,7 +23,7 @@ class Photo with _$Photo {
 @freezed
 class Photos with _$Photos {
   const factory Photos({
-    required List<Photo> photos,
+    required List<Photo> data,
   }) = _Photos;
 
   factory Photos.fromJson(Map<String, dynamic> json) => _$PhotosFromJson(json);

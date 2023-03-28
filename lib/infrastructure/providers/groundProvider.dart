@@ -1,3 +1,4 @@
+import 'package:file_ground_front/application/ports/groundRepository.dart';
 import 'package:file_ground_front/application/usecases/groundsUseCase.dart';
 import 'package:file_ground_front/infrastructure/adapters/groundRepositoryImpl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +10,9 @@ final groundUseCaseProvider =
     StateNotifierProvider<GroundUseCase, Grounds>((Ref ref) {
   final dio = ref.watch(dioProvider);
   final dioAuth = ref.watch(dioAuthProvider);
-  GroundRepositoryImpl groundRepository =
+  GroundRepository groundRepository =
       GroundRepositoryImpl(dio: dio, dioAuth: dioAuth);
-  return GroundUseCase(groundRepository: groundRepository);
+  final notifier = GroundUseCase(groundRepository: groundRepository);
+  notifier.init();
+  return notifier;
 });
