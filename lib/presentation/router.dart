@@ -1,5 +1,5 @@
 import 'package:file_ground_front/presentation/connect/connectPage.dart';
-import 'package:file_ground_front/presentation/pages/mainPage.dart';
+import 'package:file_ground_front/presentation/main/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +10,7 @@ final router = GoRouter(
     GoRoute(
       path: '/',
       pageBuilder: (context, state) => CustomTransitionPage(
-        child: ConnectPage(),
+        child: MainPage(),
         transitionDuration: Duration(milliseconds: 100),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(

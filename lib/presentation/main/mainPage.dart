@@ -1,5 +1,7 @@
 import 'package:file_ground_front/presentation/connect/connectPage.dart';
+import 'package:file_ground_front/presentation/main/mainViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../common/atomic/containers.dart';
@@ -7,21 +9,14 @@ import '../common/atomic/paddings.dart';
 import '../common/components/customAppBar.dart';
 import '../common/components/iconTitleDesc.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends ConsumerWidget {
   const MainPage({Key? key}) : super(key: key);
 
-  void pushConnectPage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ConnectPage(),
-      ),
-    );
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final pushConnectPage =
+        ref.read(mainViewModelProvider.notifier).pushConnectPage;
     return Padding(
       padding: getPagePadding(),
       child: Scaffold(
