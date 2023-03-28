@@ -32,6 +32,10 @@ class MainViewModel extends StateNotifier<MainState> {
   void pushCreditPage(BuildContext context) {
     context.push(CREDIT_PAGE_PATH);
   }
+
+  void pushSettingPage(BuildContext context) {
+    context.push(SETTING_PAGE_PATH);
+  }
 }
 
 final mainViewModelProvider = StateNotifierProvider<MainViewModel, MainState>(

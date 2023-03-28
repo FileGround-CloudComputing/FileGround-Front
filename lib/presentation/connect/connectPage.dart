@@ -16,7 +16,7 @@ class ConnectPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: TitleText(
+          title: BoldText(
             '그라운드 좌표 입력',
             color: color.onBackground,
           ),

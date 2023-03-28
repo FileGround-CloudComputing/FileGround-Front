@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final color = Theme.of(context).colorScheme;
     return AppBar(
       toolbarHeight: height,
-      title: TitleText(
+      title: BoldText(
         'File Ground',
         color: color.primary,
       ),

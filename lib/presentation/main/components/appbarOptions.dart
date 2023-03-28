@@ -9,17 +9,22 @@ class AppBarOptions extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pushCreditPage =
         ref.read(mainViewModelProvider.notifier).pushCreditPage;
+    final pushSettingPage =
+        ref.read(mainViewModelProvider.notifier).pushSettingPage;
     return PopupMenuButton(
       icon: const Icon(Icons.more_vert),
       itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-        const PopupMenuItem(
-          child: Text('설정'),
+        PopupMenuItem(
+          onTap: () {
+            pushSettingPage(context);
+          },
+          child: const Text('설정'),
         ),
         PopupMenuItem(
           onTap: () {
             pushCreditPage(context);
           },
-          child: Text('크레딧'),
+          child: const Text('크레딧'),
         ),
       ],
     );

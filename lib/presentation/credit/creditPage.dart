@@ -14,7 +14,7 @@ class CreditPage extends StatelessWidget {
       padding: getPagePadding(),
       child: Scaffold(
         appBar: AppBar(
-          title: TitleText(
+          title: BoldText(
             '크레딧',
             color: color.onBackground,
           ),

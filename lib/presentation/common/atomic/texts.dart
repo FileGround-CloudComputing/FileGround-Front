@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TitleText extends StatelessWidget {
+class BoldText extends StatelessWidget {
   final String text;
-  final Color color;
+  final Color? color;
   final double fontSize;
-  const TitleText(
+  const BoldText(
     this.text, {
     Key? key,
-    required this.color,
+    this.color,
     this.fontSize = 26,
   }) : super(key: key);
 

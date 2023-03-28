@@ -28,7 +28,7 @@ class IconTitleDesc extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TitleText(
+            BoldText(
               title,
               color: color.onSurface,
             ),
