@@ -8,16 +8,30 @@ import '../../domain/result/result.dart';
 
 class AuthUseCase extends StateNotifier<Session?> {
   AuthRepository authRepository;
+
   AuthUseCase({
     required this.authRepository,
   }) : super(null);
 
-  void init() {
-    loadSession();
+  Future<void> init() async {
+    await loadSession();
   }
 
   Future<Result<String>> getAuthUrl() async {
     return await authRepository.getAuthUrlWithNaver();
+  }
+
+  Future<Result<bool>> renewRefreshToken() async {
+    final result = await authRepository.renewRefreshToken();
+    return result.when(
+      success: (Session session) {
+        state = session;
+        return const Result.success(true);
+      },
+      error: (e) {
+        return const Result.error(Failure.unauthorized());
+      },
+    );
   }
 
   Future<Result<bool>> renewAccessToken() async {
@@ -31,6 +45,7 @@ class AuthUseCase extends StateNotifier<Session?> {
           accessToken: accessTokenDto.accessToken,
           accessTokenExpiresIn: accessTokenDto.accessTokenExpiresIn,
         );
+        saveSession();
         return const Result.success(true);
       },
       error: (e) {
@@ -46,6 +61,10 @@ class AuthUseCase extends StateNotifier<Session?> {
     }
     await authRepository.signOut(state!);
     state = null;
+  }
+
+  Future<void> clearSession() async {
+    return;
   }
 
   Future<void> saveSession() async {

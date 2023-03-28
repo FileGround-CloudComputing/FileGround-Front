@@ -19,6 +19,7 @@ class UserRepositoryImpl extends UserRepository {
     } on Failure catch (failure) {
       return Result.error(failure);
     } catch (e) {
+      print(e);
       return const Result.error(Failure.badRequest());
     }
     try {

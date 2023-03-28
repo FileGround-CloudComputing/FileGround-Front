@@ -1,8 +1,8 @@
-import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
 import 'package:file_ground_front/presentation/common/atomic/containers.dart';
 import 'package:file_ground_front/presentation/common/atomic/paddings.dart';
 import 'package:file_ground_front/presentation/common/atomic/texts.dart';
+import 'package:file_ground_front/presentation/setting/settingViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,6 +12,7 @@ class LoginInfo extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userUseCaseProvider);
+    final signOut = ref.read(settingViewModelProvider.notifier).signOut;
     if (user == null) {
       return const SizedBox();
     }
@@ -21,7 +22,10 @@ class LoginInfo extends ConsumerWidget {
           width: double.infinity,
           child: Text(user.name),
         ),
-        const RoundedSurfaceContainer(
+        RoundedSurfaceInk(
+          onTap: () {
+            signOut(context);
+          },
           width: double.infinity,
           child: Text('로그아웃'),
         ),
@@ -36,6 +40,7 @@ class SettingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userUseCaseProvider);
+    final mockLogin = ref.read(settingViewModelProvider.notifier).mockLogin;
     return Padding(
       padding: getPagePadding(),
       child: Scaffold(
@@ -48,7 +53,9 @@ class SettingPage extends ConsumerWidget {
             children: [
               if (user == null)
                 RoundedSurfaceInk(
-                  onTap: () {},
+                  onTap: () {
+                    mockLogin(context);
+                  },
                   width: double.infinity,
                   child: const BoldText(
                     '로그인을 해주세요.',

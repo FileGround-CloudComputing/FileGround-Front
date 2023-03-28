@@ -11,7 +11,7 @@ class GroundUseCase extends StateNotifier<Grounds> {
     required this.groundRepository,
   }) : super(const Grounds());
   void init() {
-    //loadGrounds();
+    loadGrounds();
   }
 
   Future<void> loadGrounds() async {

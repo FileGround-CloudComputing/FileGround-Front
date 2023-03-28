@@ -62,11 +62,8 @@ class GroundRepositoryImpl extends GroundRepository {
       return const Result.error(Failure.badRequest());
     }
     try {
-      print(Ground.fromJson(Map.from(result.data['data'][0])));
-      final data = Grounds.fromJson(Map<String, dynamic>.from(result.data));
-      return Result.success(data);
+      return Result.success(result.data);
     } catch (e) {
-      print(e.toString());
       return Result.error(Failure.unprocessableEntity(message: e.toString()));
     }
   }

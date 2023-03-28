@@ -8,9 +8,8 @@ import '../dio/dioProvider.dart';
 
 final userUseCaseProvider =
     StateNotifierProvider<UserUseCase, User?>((Ref ref) {
-  final dioAuth = ref.watch(dioAuthProvider);
+  final dioAuth = ref.read(dioAuthProvider);
   UserRepository userRepository = UserRepositoryImpl(dioAuth: dioAuth);
   final notifier = UserUseCase(userRepository: userRepository);
-  notifier.init();
   return notifier;
 });

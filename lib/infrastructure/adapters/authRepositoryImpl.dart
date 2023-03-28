@@ -50,7 +50,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Result<AccessTokenDto>> renewAccessToken(Session session) async {
     final Response result;
     try {
-      result = await dio.get(
+      result = await dio.post(
         '/auth/access',
         options: Options(
           headers: {
@@ -65,7 +65,6 @@ class AuthRepositoryImpl implements AuthRepository {
     }
 
     try {
-      print(result.data);
       return Result.success(AccessTokenDto.fromJson(result.data));
     } catch (e) {
       return Result.error(Failure.unprocessableEntity(message: e.toString()));
@@ -73,9 +72,24 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<Session>> renewRefreshToken() {
-    // TODO: implement renewRefreshToken
-    throw UnimplementedError();
+  Future<Result<Session>> renewRefreshToken() async {
+    // TODO this is mockup
+    final Response result;
+    try {
+      result = await dio.post(
+        '/auth/refresh',
+      );
+    } on Failure catch (e) {
+      return Result.error(e);
+    } catch (e) {
+      return Result.error(Failure.unprocessableEntity(message: e.toString()));
+    }
+
+    try {
+      return Result.success(Session.fromJson(result.data));
+    } catch (e) {
+      return Result.error(Failure.unprocessableEntity(message: e.toString()));
+    }
   }
 
   @override

@@ -13,6 +13,5 @@ final groundUseCaseProvider =
   GroundRepository groundRepository =
       GroundRepositoryImpl(dio: dio, dioAuth: dioAuth);
   final notifier = GroundUseCase(groundRepository: groundRepository);
-  notifier.init();
   return notifier;
 });

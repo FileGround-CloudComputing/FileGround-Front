@@ -1,27 +1,29 @@
 import 'package:file_ground_front/domain/constants/paths.dart';
+import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
-import 'package:file_ground_front/presentation/connect/states/connectState.dart';
-import 'package:file_ground_front/presentation/credit/creditPage.dart';
 import 'package:file_ground_front/presentation/main/states/mainState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../domain/models/ground.dart';
+import '../../domain/models/session.dart';
 import '../../domain/models/user.dart';
-import '../connect/connectPage.dart';
 
 class MainViewModel extends StateNotifier<MainState> {
   Ref ref;
   final User? user;
   final Grounds grounds;
-  MainViewModel({
-    required this.ref,
-    required this.user,
-    required this.grounds,
-  }) : super(MainState(user: user, grounds: grounds));
+  final Session? session;
+  MainViewModel(
+      {required this.ref,
+      required this.user,
+      required this.grounds,
+      required this.session})
+      : super(MainState(user: user, grounds: grounds));
 
-  void init() {
+  void init() async {
+    ref.read(userUseCaseProvider.notifier).init();
     ref.read(groundUseCaseProvider.notifier).loadGrounds();
   }
 
@@ -38,11 +40,14 @@ class MainViewModel extends StateNotifier<MainState> {
   }
 }
 
-final mainViewModelProvider = StateNotifierProvider<MainViewModel, MainState>(
+final mainViewModelProvider =
+    StateNotifierProvider.autoDispose<MainViewModel, MainState>(
   (ref) {
+    final session = ref.watch(authUseCaseProvider);
     final user = ref.watch(userUseCaseProvider);
     final grounds = ref.watch(groundUseCaseProvider);
-    final notifier = MainViewModel(ref: ref, grounds: grounds, user: user);
+    final notifier =
+        MainViewModel(ref: ref, grounds: grounds, user: user, session: session);
     return notifier;
   },
 );
