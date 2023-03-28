@@ -1,3 +1,4 @@
+import 'package:file_ground_front/domain/constants/paths.dart';
 import 'package:file_ground_front/presentation/common/atomic/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +37,7 @@ class CreditInfos extends StatelessWidget {
         const SizedBox(height: 16),
         RoundedBorderTextButton(
           onPressed: () {
-            context.go('/ground/license');
+            context.push(LICENSE_PAGE_PATH);
           },
           child: Text(
             '오픈소스 라이센스',
