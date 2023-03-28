@@ -8,17 +8,22 @@ part 'ground.freezed.dart';
 
 @freezed
 class Ground with _$Ground {
+  const Ground._();
   const factory Ground({
     required int id,
     required String coordinate,
     required String title,
     User? maker,
-    required String expiresIn,
+    required DateTime expiresIn,
     @Default([]) List<Photo> photos,
     @Default([]) List<User> currentPeople,
   }) = _Ground;
 
   factory Ground.fromJson(Map<String, dynamic> json) => _$GroundFromJson(json);
+
+  String getFormatExpireDate() {
+    return '${expiresIn.month}월 ${expiresIn.day}일 ${expiresIn.hour}:${expiresIn.minute}분';
+  }
 }
 
 @freezed

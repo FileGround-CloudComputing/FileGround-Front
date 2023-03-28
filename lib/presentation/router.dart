@@ -1,4 +1,5 @@
 import 'package:file_ground_front/presentation/connect/connectPage.dart';
+import 'package:file_ground_front/presentation/credit/creditPage.dart';
 import 'package:file_ground_front/presentation/main/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +11,7 @@ final router = GoRouter(
     GoRoute(
       path: '/',
       pageBuilder: (context, state) => CustomTransitionPage(
-        child: MainPage(),
+        child: CreditPage(),
         transitionDuration: Duration(milliseconds: 100),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(
@@ -20,9 +21,9 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      path: '/connect',
+      path: '/ground/license',
       pageBuilder: (context, state) => CustomTransitionPage(
-        child: ConnectPage(),
+        child: LicensePage(),
         transitionDuration: Duration(milliseconds: 100),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(

@@ -9,6 +9,7 @@ import '../common/atomic/containers.dart';
 import '../common/atomic/paddings.dart';
 import '../common/components/customAppBar.dart';
 import '../common/components/iconTitleDesc.dart';
+import 'components/appbarOptions.dart';
 
 class MainPage extends ConsumerWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -23,9 +24,9 @@ class MainPage extends ConsumerWidget {
       padding: getPagePadding(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+            AppBarOptions(),
           ],
         ),
         body: Column(
@@ -56,9 +57,8 @@ class MainPage extends ConsumerWidget {
             const SizedBox(
               height: 16,
             ),
-            RoundedSurfaceInk(
+            RoundedSurfaceContainer(
               width: double.infinity,
-              onTap: () {},
               child: Column(
                 children: const [
                   IconTitleDesc(

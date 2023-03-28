@@ -44,3 +44,21 @@ class NumpadRemoveButton extends StatelessWidget {
     );
   }
 }
+
+class RoundedBorderTextButton extends StatelessWidget {
+  final void Function()? onPressed;
+  final Widget child;
+  const RoundedBorderTextButton({
+    Key? key,
+    this.onPressed,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: onPressed,
+      child: child,
+    );
+  }
+}

@@ -7,7 +7,7 @@ import '../providers/authProvider.dart';
 final dioProvider = Provider<Dio>((Ref ref) {
   return Dio(BaseOptions(
     baseUrl: 'https://3545a35c-f83d-48a5-812d-3fa3983ceec7.mock.pstmn.io',
-    connectTimeout: const Duration(seconds: 5),
+    connectTimeout: const Duration(seconds: 2),
   ));
 });
 
@@ -16,19 +16,17 @@ final dioAuthProvider = Provider<Dio>((Ref ref) {
   final authUseCase = ref.read(authUseCaseProvider.notifier);
   final dio = Dio(BaseOptions(
     baseUrl: 'https://3545a35c-f83d-48a5-812d-3fa3983ceec7.mock.pstmn.io',
-    connectTimeout: const Duration(seconds: 5),
+    connectTimeout: const Duration(seconds: 2),
   ));
   dio.interceptors.clear();
   dio.interceptors.add(InterceptorsWrapper(onRequest: (option, handler) async {
-    // TODO : 원복시키기
-    // if (session == null) {
-    //   authUseCase.signOut();
-    //   throw const Failure.unauthorized();
-    // }
+    if (session == null) {
+      authUseCase.signOut();
+      throw const Failure.unauthorized();
+    }
     await authUseCase.renewAccessToken();
-    option.headers['Authorization'] = 'Bearer asd';
-    // option.headers['Authorization'] =
-    //     '${session.tokenType} ${session.accessToken}';
+    option.headers['Authorization'] =
+        '${session!.tokenType} ${session.accessToken}';
     return handler.next(option);
   }));
   return dio;

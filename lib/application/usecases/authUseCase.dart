@@ -27,7 +27,6 @@ class AuthUseCase extends StateNotifier<Session?> {
     final result = await authRepository.renewAccessToken(state!);
     return result.when(
       success: (AccessTokenDto accessTokenDto) {
-        // TODO parse 과정에서 잠재적인 오류 발생 가능.
         state = state?.copyWith(
           accessToken: accessTokenDto.accessToken,
           accessTokenExpiresIn: accessTokenDto.accessTokenExpiresIn,

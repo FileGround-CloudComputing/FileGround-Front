@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       theme: ThemeData(
         useMaterial3: true,
+        scaffoldBackgroundColor: Colors.transparent,
         primarySwatch: Colors.blue,
       ),
     );

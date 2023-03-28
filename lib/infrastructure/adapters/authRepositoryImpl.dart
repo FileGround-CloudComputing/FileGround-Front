@@ -65,6 +65,7 @@ class AuthRepositoryImpl implements AuthRepository {
     }
 
     try {
+      print(result.data);
       return Result.success(AccessTokenDto.fromJson(result.data));
     } catch (e) {
       return Result.error(Failure.unprocessableEntity(message: e.toString()));
