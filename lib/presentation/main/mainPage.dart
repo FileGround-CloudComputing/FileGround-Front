@@ -18,6 +18,7 @@ class MainPage extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     final pushConnectPage =
         ref.read(mainViewModelProvider.notifier).pushConnectPage;
+    ref.read(mainViewModelProvider.notifier).init();
     return Padding(
       padding: getPagePadding(),
       child: Scaffold(

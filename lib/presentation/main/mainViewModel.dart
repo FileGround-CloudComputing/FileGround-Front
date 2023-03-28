@@ -18,6 +18,10 @@ class MainViewModel extends StateNotifier<MainState> {
     required this.grounds,
   }) : super(MainState(user: user, grounds: grounds));
 
+  void init() {
+    ref.read(groundUseCaseProvider.notifier).loadGrounds();
+  }
+
   void pushConnectPage(BuildContext context) {
     Navigator.push(
       context,
