@@ -1,3 +1,4 @@
+import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
 import 'package:file_ground_front/presentation/connect/connectPage.dart';
 import 'package:file_ground_front/presentation/main/components/groundsList.dart';
 import 'package:file_ground_front/presentation/main/mainViewModel.dart';
@@ -19,7 +20,10 @@ class MainPage extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     final pushConnectPage =
         ref.read(mainViewModelProvider.notifier).pushConnectPage;
-    ref.read(mainViewModelProvider.notifier).init();
+    final user = ref.watch(userUseCaseProvider);
+    if (user != null) {
+      ref.read(mainViewModelProvider.notifier).init();
+    }
     return Padding(
       padding: getPagePadding(),
       child: Scaffold(

@@ -27,7 +27,13 @@ final dioAuthProvider = Provider<Dio>((Ref ref) {
         return handler.next(option);
       },
       error: (Failure e) {
-        throw e;
+        handler.reject(
+          DioError(
+            requestOptions: option,
+            type: DioErrorType.badCertificate,
+            error: e,
+          ),
+        );
       },
     );
   }));
