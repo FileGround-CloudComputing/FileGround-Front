@@ -15,12 +15,12 @@ class MainViewModel extends StateNotifier<MainState> {
   final User? user;
   final Grounds grounds;
   final Session? session;
-  MainViewModel(
-      {required this.ref,
-      required this.user,
-      required this.grounds,
-      required this.session})
-      : super(MainState(user: user, grounds: grounds));
+  MainViewModel({
+    required this.ref,
+    required this.user,
+    required this.grounds,
+    required this.session,
+  }) : super(MainState(user: user, grounds: grounds));
 
   void init() async {
     ref.read(userUseCaseProvider.notifier).init();

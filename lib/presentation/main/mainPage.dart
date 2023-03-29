@@ -57,7 +57,7 @@ class MainPage extends ConsumerWidget {
             const SizedBox(
               height: 16,
             ),
-            RoundedSurfaceContainer(
+            RoundedSurfaceInk(
               width: double.infinity,
               child: Column(
                 children: const [

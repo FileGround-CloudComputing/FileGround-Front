@@ -62,7 +62,7 @@ class GroundRepositoryImpl extends GroundRepository {
       return const Result.error(Failure.badRequest());
     }
     try {
-      return Result.success(result.data);
+      return Result.success(Grounds.fromJson(result.data));
     } catch (e) {
       return Result.error(Failure.unprocessableEntity(message: e.toString()));
     }

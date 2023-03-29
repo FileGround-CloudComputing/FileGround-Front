@@ -56,7 +56,12 @@ class GroundsList extends ConsumerWidget {
         ref.watch(mainViewModelProvider.select((value) => value.grounds)).data;
 
     if (user == null) {
-      return const Text('please login');
+      return TextButton(
+        onPressed: () {
+          ref.read(mainViewModelProvider.notifier).pushSettingPage(context);
+        },
+        child: const Text('please login'),
+      );
     }
     return Column(
       children: [

@@ -54,7 +54,7 @@ class AuthRepositoryImpl implements AuthRepository {
         '/auth/access',
         options: Options(
           headers: {
-            'a': session.refreshToken,
+            'Authorization': '${session.tokenType} ${session.refreshToken}',
           },
         ),
       );

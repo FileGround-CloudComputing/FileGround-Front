@@ -34,7 +34,7 @@ class AuthUseCase extends StateNotifier<Session?> {
     );
   }
 
-  Future<Result<bool>> renewAccessToken() async {
+  Future<Result<String>> renewAccessToken() async {
     if (state == null) {
       return const Result.error(Failure.unauthorized());
     }
@@ -46,7 +46,7 @@ class AuthUseCase extends StateNotifier<Session?> {
           accessTokenExpiresIn: accessTokenDto.accessTokenExpiresIn,
         );
         saveSession();
-        return const Result.success(true);
+        return Result.success(accessTokenDto.accessToken);
       },
       error: (e) {
         signOut();
