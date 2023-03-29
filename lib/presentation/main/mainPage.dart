@@ -1,3 +1,4 @@
+import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
 import 'package:file_ground_front/presentation/connect/connectPage.dart';
 import 'package:file_ground_front/presentation/main/components/groundsList.dart';
@@ -20,8 +21,8 @@ class MainPage extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     final pushConnectPage =
         ref.read(mainViewModelProvider.notifier).pushConnectPage;
-    final user = ref.watch(userUseCaseProvider);
-    if (user != null) {
+    final session = ref.watch(authUseCaseProvider);
+    if (session != null) {
       ref.read(mainViewModelProvider.notifier).init();
     }
     return Padding(
