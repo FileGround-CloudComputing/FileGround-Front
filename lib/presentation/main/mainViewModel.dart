@@ -38,6 +38,10 @@ class MainViewModel extends StateNotifier<MainState> {
   void pushSettingPage(BuildContext context) {
     context.push(SETTING_PAGE_PATH);
   }
+
+  void pushMakePage(BuildContext context) {
+    context.push(MAKE_PAGE_PATH);
+  }
 }
 
 final mainViewModelProvider =

@@ -2,6 +2,7 @@ import 'package:file_ground_front/domain/constants/paths.dart';
 import 'package:file_ground_front/presentation/connect/connectPage.dart';
 import 'package:file_ground_front/presentation/credit/creditPage.dart';
 import 'package:file_ground_front/presentation/main/mainPage.dart';
+import 'package:file_ground_front/presentation/make/makePage.dart';
 import 'package:file_ground_front/presentation/setting/settingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -38,5 +39,9 @@ final router = GoRouter(
       path: SETTING_PAGE_PATH,
       builder: (_, __) => SettingPage(),
     ),
+    GoRoute(
+      path: MAKE_PAGE_PATH,
+      builder: (_, __) => MakePage(),
+    )
   ],
 );

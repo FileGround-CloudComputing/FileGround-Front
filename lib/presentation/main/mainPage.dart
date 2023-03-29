@@ -1,5 +1,6 @@
 import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
+import 'package:file_ground_front/presentation/common/atomic/texts.dart';
 import 'package:file_ground_front/presentation/connect/connectPage.dart';
 import 'package:file_ground_front/presentation/main/components/groundsList.dart';
 import 'package:file_ground_front/presentation/main/mainViewModel.dart';
@@ -18,10 +19,11 @@ class MainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size;
+    final color = Theme.of(context).colorScheme;
     final pushConnectPage =
         ref.read(mainViewModelProvider.notifier).pushConnectPage;
-    final session = ref.watch(authUseCaseProvider);
+    final pushMakePage = ref.read(mainViewModelProvider.notifier).pushMakePage;
+    final session = ref.read(authUseCaseProvider);
     if (session != null) {
       ref.read(mainViewModelProvider.notifier).init();
     }
@@ -29,8 +31,12 @@ class MainPage extends ConsumerWidget {
       padding: getPagePadding(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: const CustomAppBar(
-          actions: [
+        appBar: CustomAppBar(
+          title: BoldText(
+            'File Ground',
+            color: color.primary,
+          ),
+          actions: const [
             AppBarOptions(),
           ],
         ),
@@ -38,7 +44,9 @@ class MainPage extends ConsumerWidget {
           children: [
             RoundedSurfaceInk(
               width: double.infinity,
-              onTap: () {},
+              onTap: () {
+                pushMakePage(context);
+              },
               child: const IconTitleDesc(
                 icon: Icons.coffee_maker,
                 title: '그라운드 만들기',
