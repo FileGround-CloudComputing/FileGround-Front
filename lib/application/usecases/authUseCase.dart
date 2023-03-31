@@ -26,6 +26,7 @@ class AuthUseCase extends StateNotifier<Session?> {
     return result.when(
       success: (Session session) {
         state = session;
+        saveSession();
         return const Result.success(true);
       },
       error: (e) {
@@ -45,7 +46,7 @@ class AuthUseCase extends StateNotifier<Session?> {
           accessToken: accessTokenDto.accessToken,
           accessTokenExpiresIn: accessTokenDto.accessTokenExpiresIn,
         );
-        saveSession();
+
         return Result.success(accessTokenDto.accessToken);
       },
       error: (e) {
@@ -60,14 +61,12 @@ class AuthUseCase extends StateNotifier<Session?> {
       return;
     }
     await authRepository.signOut(state!);
-    await authRepository.clearSession();
-    state = null;
-    ref.read(userUseCaseProvider.notifier).clearUser();
-    ref.read(groundUseCaseProvider.notifier).clearGrounds();
+    clearSession();
   }
 
   Future<void> clearSession() async {
-    return;
+    await authRepository.clearSession();
+    state = null;
   }
 
   Future<void> saveSession() async {

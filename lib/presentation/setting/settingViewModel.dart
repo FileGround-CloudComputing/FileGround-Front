@@ -1,6 +1,7 @@
 import 'package:file_ground_front/application/usecases/authUseCase.dart';
 import 'package:file_ground_front/application/usecases/userUseCase.dart';
 import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
+import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
 import 'package:file_ground_front/presentation/common/components/failureDialog.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class SettingViewModel extends StateNotifier<void> {
     final result = await authUseCase.renewRefreshToken();
     result.when(success: (_) async {
       await userUseCase.getInfo();
+      await ref.read(groundUseCaseProvider.notifier).loadGrounds();
     }, error: (e) {
       showDialog(
         context: context,
@@ -30,6 +32,8 @@ class SettingViewModel extends StateNotifier<void> {
 
   void signOut(BuildContext context) async {
     final result = await authUseCase.signOut();
+    ref.read(userUseCaseProvider.notifier).clearUser();
+    ref.read(groundUseCaseProvider.notifier).clearGrounds();
   }
 }
 
