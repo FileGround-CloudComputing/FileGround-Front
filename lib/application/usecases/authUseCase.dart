@@ -1,6 +1,8 @@
 import 'package:file_ground_front/application/dto/authDto.dart';
 import 'package:file_ground_front/application/ports/authRepository.dart';
 import 'package:file_ground_front/domain/failure/failure.dart';
+import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
+import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../domain/models/session.dart';
@@ -8,10 +10,8 @@ import '../../domain/result/result.dart';
 
 class AuthUseCase extends StateNotifier<Session?> {
   AuthRepository authRepository;
-
-  AuthUseCase({
-    required this.authRepository,
-  }) : super(null);
+  Ref ref;
+  AuthUseCase({required this.authRepository, required this.ref}) : super(null);
 
   Future<void> init() async {
     await loadSession();
@@ -60,7 +60,10 @@ class AuthUseCase extends StateNotifier<Session?> {
       return;
     }
     await authRepository.signOut(state!);
+    await authRepository.clearSession();
     state = null;
+    ref.read(userUseCaseProvider.notifier).clearUser();
+    ref.read(groundUseCaseProvider.notifier).clearGrounds();
   }
 
   Future<void> clearSession() async {

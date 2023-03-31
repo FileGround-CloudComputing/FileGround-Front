@@ -14,6 +14,10 @@ class UserUseCase extends StateNotifier<User?> {
     await getInfo();
   }
 
+  void clearUser() {
+    state = null;
+  }
+
   Future<void> getInfo() async {
     final result = await userRepository.getInfo();
     result.when(

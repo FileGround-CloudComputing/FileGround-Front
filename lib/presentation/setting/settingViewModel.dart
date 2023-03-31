@@ -3,7 +3,6 @@ import 'package:file_ground_front/application/usecases/userUseCase.dart';
 import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
 import 'package:file_ground_front/presentation/common/components/failureDialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

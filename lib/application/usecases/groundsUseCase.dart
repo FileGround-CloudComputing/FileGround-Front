@@ -14,6 +14,10 @@ class GroundUseCase extends StateNotifier<Grounds> {
     loadGrounds();
   }
 
+  void clearGrounds() {
+    state = const Grounds(data: []);
+  }
+
   Future<void> loadGrounds() async {
     final result = await groundRepository.getGrounds();
     result.when(

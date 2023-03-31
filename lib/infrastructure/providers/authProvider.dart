@@ -13,6 +13,6 @@ final authUseCaseProvider =
   final secureStorage = ref.watch(secureStorageProvider);
   AuthRepositoryImpl authRepository =
       AuthRepositoryImpl(dio: dio, secureStorage: secureStorage);
-  final notifier = AuthUseCase(authRepository: authRepository);
+  final notifier = AuthUseCase(authRepository: authRepository, ref: ref);
   return notifier;
 });

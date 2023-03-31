@@ -31,6 +31,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<void> clearSession() async {
+    await secureStorage.delete(key: 'refresh');
+    await secureStorage.delete(key: 'refresh-expire');
+  }
+
+  @override
   Future<Result<Session>> loadSession() async {
     final refreshToken = await secureStorage.read(key: 'refresh');
     if (refreshToken == null) {
@@ -101,7 +107,7 @@ class AuthRepositoryImpl implements AuthRepository {
       '/auth',
       options: Options(
         headers: {
-          'accessToken': session.accessToken!,
+          'Authorization': '${session.tokenType} ${session.accessToken!}',
         },
       ),
     );

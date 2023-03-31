@@ -17,6 +17,7 @@ abstract class AuthRepository {
   Future<Result<Session>> renewRefreshToken();
 
   Future<void> saveSession(Session session);
+  Future<void> clearSession();
 
   Future<Result<Session>> loadSession();
 }
