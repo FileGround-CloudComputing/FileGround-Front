@@ -2,6 +2,7 @@ import 'package:file_ground_front/application/usecases/authUseCase.dart';
 import 'package:file_ground_front/application/usecases/userUseCase.dart';
 import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
+import 'package:file_ground_front/presentation/common/components/failureDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,10 +24,7 @@ class SettingViewModel extends StateNotifier<void> {
     }, error: (e) {
       showDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(content: Text(e.toString()));
-        },
-        useSafeArea: false,
+        builder: (BuildContext context) => FailureDialog(failure: e),
       );
     });
   }

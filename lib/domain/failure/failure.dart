@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 part 'failure.freezed.dart';
 
 @freezed
-class Failure implements Exception {
+class Failure with _$Failure implements Exception {
   const Failure._();
 
   /// Expected value is null or empty

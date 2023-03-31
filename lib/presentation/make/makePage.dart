@@ -20,6 +20,8 @@ class MakePage extends ConsumerWidget {
         makePageViewModelProvider.select((value) => value.groundDuration));
     final isValid =
         ref.watch(makePageViewModelProvider.select((value) => value.isValid));
+    final handlePostGround =
+        ref.read(makePageViewModelProvider.notifier).handlePostGround;
     return Padding(
       padding: getPagePadding(),
       child: Scaffold(
@@ -46,7 +48,9 @@ class MakePage extends ConsumerWidget {
             children: [
               PrimaryElevatedButton(
                 isActive: isValid,
-                onPressed: () {},
+                onPressed: () {
+                  handlePostGround(context);
+                },
                 child: const Text(
                   '다음',
                   style: TextStyle(fontSize: 24),

@@ -10,8 +10,8 @@ part 'ground.freezed.dart';
 class Ground with _$Ground {
   const Ground._();
   const factory Ground({
-    required int id,
-    required String coordinate,
+    int? id,
+    String? coordinate,
     required String title,
     User? maker,
     required DateTime expiresIn,

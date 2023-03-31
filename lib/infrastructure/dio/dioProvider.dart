@@ -8,6 +8,7 @@ import '../providers/authProvider.dart';
 final dioProvider = Provider<Dio>((Ref ref) {
   return Dio(BaseOptions(
     baseUrl: 'http://localhost:8000',
+    headers: {'Content-Type': 'application/json'},
     connectTimeout: const Duration(seconds: 2),
   ));
 });
@@ -15,6 +16,7 @@ final dioProvider = Provider<Dio>((Ref ref) {
 final dioAuthProvider = Provider<Dio>((Ref ref) {
   final dio = Dio(BaseOptions(
     baseUrl: 'http://localhost:8000',
+    headers: {'Content-Type': 'application/json'},
     connectTimeout: const Duration(seconds: 2),
   ));
   dio.interceptors.clear();

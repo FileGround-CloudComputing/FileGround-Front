@@ -1,4 +1,6 @@
 import 'package:file_ground_front/domain/models/ground.dart';
+import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
+import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
 import 'package:file_ground_front/presentation/common/atomic/containers.dart';
 import 'package:file_ground_front/presentation/main/mainViewModel.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +32,7 @@ class GroundInfo extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                ground.coordinate,
+                ground.coordinate!,
                 style: const TextStyle(
                   fontSize: 16,
                 ),
@@ -51,9 +53,8 @@ class GroundsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(mainViewModelProvider.select((value) => value.user));
-    final grounds =
-        ref.watch(mainViewModelProvider.select((value) => value.grounds)).data;
+    final user = ref.watch(userUseCaseProvider);
+    final grounds = ref.watch(groundUseCaseProvider).data;
 
     if (user == null) {
       return TextButton(

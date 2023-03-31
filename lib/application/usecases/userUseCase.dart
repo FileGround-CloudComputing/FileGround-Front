@@ -10,8 +10,8 @@ class UserUseCase extends StateNotifier<User?> {
     required this.userRepository,
   }) : super(null);
 
-  void init() {
-    getInfo();
+  Future<void> init() async {
+    await getInfo();
   }
 
   Future<void> getInfo() async {

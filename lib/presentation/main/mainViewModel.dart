@@ -2,7 +2,6 @@ import 'package:file_ground_front/domain/constants/paths.dart';
 import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
-import 'package:file_ground_front/presentation/main/states/mainState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,21 +9,15 @@ import '../../../domain/models/ground.dart';
 import '../../domain/models/session.dart';
 import '../../domain/models/user.dart';
 
-class MainViewModel extends StateNotifier<MainState> {
+class MainViewModel extends StateNotifier<void> {
   Ref ref;
-  final User? user;
-  final Grounds grounds;
-  final Session? session;
   MainViewModel({
     required this.ref,
-    required this.user,
-    required this.grounds,
-    required this.session,
-  }) : super(MainState(user: user, grounds: grounds));
+  }) : super(null);
 
   void init() async {
-    ref.read(userUseCaseProvider.notifier).init();
-    ref.read(groundUseCaseProvider.notifier).loadGrounds();
+    await ref.read(userUseCaseProvider.notifier).init();
+    await ref.read(groundUseCaseProvider.notifier).loadGrounds();
   }
 
   void pushConnectPage(BuildContext context) {
@@ -44,14 +37,10 @@ class MainViewModel extends StateNotifier<MainState> {
   }
 }
 
-final mainViewModelProvider =
-    StateNotifierProvider.autoDispose<MainViewModel, MainState>(
+final mainViewModelProvider = StateNotifierProvider<MainViewModel, void>(
   (ref) {
-    final session = ref.watch(authUseCaseProvider);
-    final user = ref.watch(userUseCaseProvider);
-    final grounds = ref.watch(groundUseCaseProvider);
-    final notifier =
-        MainViewModel(ref: ref, grounds: grounds, user: user, session: session);
+    final notifier = MainViewModel(ref: ref);
+    notifier.init();
     return notifier;
   },
 );

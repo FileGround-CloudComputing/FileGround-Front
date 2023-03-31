@@ -23,10 +23,6 @@ class MainPage extends ConsumerWidget {
     final pushConnectPage =
         ref.read(mainViewModelProvider.notifier).pushConnectPage;
     final pushMakePage = ref.read(mainViewModelProvider.notifier).pushMakePage;
-    final session = ref.read(authUseCaseProvider);
-    if (session != null) {
-      ref.read(mainViewModelProvider.notifier).init();
-    }
     return Padding(
       padding: getPagePadding(),
       child: Scaffold(
