@@ -62,3 +62,32 @@ class RoundedBorderTextButton extends StatelessWidget {
     );
   }
 }
+
+class PrimaryElevatedButton extends StatelessWidget {
+  final Widget child;
+  final double width, height;
+  final void Function()? onPressed;
+  final bool isActive;
+  const PrimaryElevatedButton({
+    Key? key,
+    required this.child,
+    required this.onPressed,
+    this.width = 300,
+    this.height = 60,
+    this.isActive = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final color = Theme.of(context).colorScheme;
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color.primary,
+        foregroundColor: color.onPrimary,
+        minimumSize: Size(width, height),
+      ),
+      onPressed: isActive ? onPressed : null,
+      child: child,
+    );
+  }
+}

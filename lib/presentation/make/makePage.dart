@@ -1,111 +1,41 @@
 import 'package:file_ground_front/presentation/common/atomic/paddings.dart';
 import 'package:file_ground_front/presentation/common/atomic/texts.dart';
 import 'package:file_ground_front/presentation/common/components/customAppBar.dart';
+import 'package:file_ground_front/presentation/make/components/titleTextField.dart';
+import 'package:file_ground_front/presentation/make/makePageViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class PrimaryElevatedButton extends StatelessWidget {
-  final Widget child;
-  final double width, height;
-  final void Function()? onPressed;
-  const PrimaryElevatedButton({
-    Key? key,
-    required this.child,
-    required this.onPressed,
-    this.width = 300,
-    this.height = 60,
-  }) : super(key: key);
+import '../common/atomic/buttons.dart';
+import 'components/durationRadio.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color.primary,
-        foregroundColor: color.onPrimary,
-        minimumSize: Size(width, height),
-      ),
-      onPressed: onPressed,
-      child: child,
-    );
-  }
-}
-
-class DurationRadio extends StatelessWidget {
-  final Duration current;
-  final Duration value;
-  final void Function(Duration?) onChanged;
-  const DurationRadio({
-    Key? key,
-    required this.current,
-    required this.value,
-    required this.onChanged,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
-    return InkWell(
-      onTap: () {
-        onChanged(value);
-      },
-      child: Ink(
-        decoration: BoxDecoration(
-          color: value == current ? color.secondaryContainer : color.surface,
-        ),
-        child: Text(
-          '${value.inHours}시간',
-          style: TextStyle(
-            fontSize: 20,
-            color: color.onSecondaryContainer,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class DurationRadioPicker extends StatelessWidget {
-  const DurationRadioPicker({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final current = Duration(hours: 12);
-    return Row(
-      children: [
-        DurationRadio(
-          current: current,
-          value: Duration(hours: 12),
-          onChanged: (v) {},
-        ),
-        DurationRadio(
-          current: current,
-          value: Duration(hours: 24),
-          onChanged: (v) {},
-        ),
-      ],
-    );
-  }
-}
-
-class MakePage extends StatelessWidget {
+class MakePage extends ConsumerWidget {
   const MakePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final color = Theme.of(context).colorScheme;
+    final currentDuration = ref.watch(
+        makePageViewModelProvider.select((value) => value.groundDuration));
+    final isValid =
+        ref.watch(makePageViewModelProvider.select((value) => value.isValid));
     return Padding(
       padding: getPagePadding(),
       child: Scaffold(
-        appBar: const CustomAppBar(
-          title: BoldText('시간 동안 유효한 그라운드 생성'),
+        appBar: CustomAppBar(
+          title: BoldText('${currentDuration.inHours}시간 동안 유효한 그라운드 생성'),
         ),
-        body: Column(
-          children: [
-            Divider(),
-            DurationRadioPicker(),
-            Divider(),
-          ],
+        body: Center(
+          child: Column(
+            children: const [
+              DurationRadioPicker(),
+              SizedBox(
+                height: 36,
+              ),
+              GroundTitleTextField(),
+            ],
+          ),
         ),
         bottomNavigationBar: Container(
           color: Colors.transparent,
@@ -115,6 +45,7 @@ class MakePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               PrimaryElevatedButton(
+                isActive: isValid,
                 onPressed: () {},
                 child: const Text(
                   '다음',
