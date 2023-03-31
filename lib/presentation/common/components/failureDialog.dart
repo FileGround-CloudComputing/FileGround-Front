@@ -1,5 +1,6 @@
 import 'package:file_ground_front/domain/failure/failure.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class FailureDialogContent extends StatelessWidget {
   final Failure failure;
@@ -18,7 +19,7 @@ class FailureDialogContent extends StatelessWidget {
         return Text('잘못 전달된 객체 ${cause}');
       },
       unauthorized: () {
-        return const Text('인증 오류');
+        return const Text('인증 오류. 로그인 해주세요.');
       },
       badRequest: () {
         return const Text('잘못된 요청');
@@ -41,6 +42,14 @@ class FailureDialog extends StatelessWidget {
       content: FailureDialogContent(
         failure: failure,
       ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            context.pop();
+          },
+          child: Text('확인'),
+        )
+      ],
     );
   }
 }

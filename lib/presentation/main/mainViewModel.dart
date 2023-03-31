@@ -1,7 +1,9 @@
 import 'package:file_ground_front/domain/constants/paths.dart';
+import 'package:file_ground_front/domain/failure/failure.dart';
 import 'package:file_ground_front/infrastructure/providers/authProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
 import 'package:file_ground_front/infrastructure/providers/userProvider.dart';
+import 'package:file_ground_front/presentation/common/components/failureDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -21,6 +23,17 @@ class MainViewModel extends StateNotifier<void> {
   }
 
   void pushConnectPage(BuildContext context) {
+    if (ref.read(authUseCaseProvider) == null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const FailureDialog(
+          failure: Failure.unauthorized(),
+        ),
+      ).then(
+        (value) => context.push(SETTING_PAGE_PATH),
+      );
+      return;
+    }
     context.push(CONNECT_PAGE_PATH);
   }
 
@@ -32,7 +45,18 @@ class MainViewModel extends StateNotifier<void> {
     context.push(SETTING_PAGE_PATH);
   }
 
-  void pushMakePage(BuildContext context) {
+  void pushMakePage(BuildContext context) async {
+    if (ref.read(authUseCaseProvider) == null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const FailureDialog(
+          failure: Failure.unauthorized(),
+        ),
+      ).then(
+        (value) => context.push(SETTING_PAGE_PATH),
+      );
+      return;
+    }
     context.push(MAKE_PAGE_PATH);
   }
 }
