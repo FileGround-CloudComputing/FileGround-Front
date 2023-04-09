@@ -33,14 +33,14 @@ class Numpad extends ConsumerWidget {
                   NumpadButton(
                     num: num.toString(),
                     onPressed: () {
-                      handleNumInput(num: num.toString());
+                      handleNumInput(num: num.toString(), context: context);
                     },
                   ),
                 const SizedBox(),
                 NumpadButton(
                   num: '0',
                   onPressed: () {
-                    handleNumInput(num: '0');
+                    handleNumInput(num: '0', context: context);
                   },
                 ),
                 NumpadRemoveButton(
