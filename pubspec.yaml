@@ -48,6 +48,8 @@ dependencies:
   webview_flutter: ^4.0.7
   qr_flutter: ^4.0.0
   flutter_dotenv: ^5.0.2
+  image_picker: ^0.8.7+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

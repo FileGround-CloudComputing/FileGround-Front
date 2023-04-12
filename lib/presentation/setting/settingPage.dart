@@ -41,30 +41,27 @@ class SettingPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userUseCaseProvider);
     final mockLogin = ref.read(settingViewModelProvider.notifier).mockLogin;
-    return Padding(
-      padding: getPagePadding(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('설정'),
-          backgroundColor: Colors.transparent,
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              if (user == null)
-                RoundedSurfaceInk(
-                  onTap: () {
-                    mockLogin(context);
-                  },
-                  width: double.infinity,
-                  child: const BoldText(
-                    '로그인을 해주세요.',
-                    fontSize: 16,
-                  ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('설정'),
+        backgroundColor: Colors.transparent,
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            if (user == null)
+              RoundedSurfaceInk(
+                onTap: () {
+                  mockLogin(context);
+                },
+                width: double.infinity,
+                child: const BoldText(
+                  '로그인을 해주세요.',
+                  fontSize: 16,
                 ),
-              LoginInfo(),
-            ],
-          ),
+              ),
+            LoginInfo(),
+          ],
         ),
       ),
     );

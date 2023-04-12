@@ -1,11 +1,16 @@
+import 'package:file_ground_front/domain/failure/failure.dart';
 import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
+import 'package:file_ground_front/presentation/common/components/failureDialog.dart';
 import 'package:file_ground_front/presentation/connect/connectViewModel.dart';
 import 'package:file_ground_front/presentation/connect/states/connectState.dart';
 import 'package:file_ground_front/presentation/ground/states/groundState.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../domain/models/ground.dart';
+import '../common/components/shareModal.dart';
 
 class GroundViewModel extends StateNotifier<GroundState> {
   Ref ref;
@@ -24,6 +29,30 @@ class GroundViewModel extends StateNotifier<GroundState> {
 
   void setLoading() {
     state = state.copyWith(isLoading: true);
+  }
+
+  void openShareModal({required BuildContext context}) {
+    if (state.ground == null) {
+      showDialog(
+        context: context,
+        builder: (_) {
+          return const FailureDialog(
+            failure: Failure.empty(),
+          );
+        },
+      );
+    }
+    showDialog(
+      context: context,
+      builder: (_) {
+        return ShareModal(groundId: state.ground!.id);
+      },
+    );
+  }
+
+  void imagePick() async {
+    final ImagePicker picker = ImagePicker();
+    final List<XFile> images = await picker.pickMultiImage();
   }
 }
 

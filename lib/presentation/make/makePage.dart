@@ -22,42 +22,39 @@ class MakePage extends ConsumerWidget {
         ref.watch(makePageViewModelProvider.select((value) => value.isValid));
     final handlePostGround =
         ref.read(makePageViewModelProvider.notifier).handlePostGround;
-    return Padding(
-      padding: getPagePadding(),
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: BoldText('${currentDuration.inHours}시간 동안 유효한 그라운드 생성'),
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: BoldText('${currentDuration.inHours}시간 동안 유효한 그라운드 생성'),
+      ),
+      body: Center(
+        child: Column(
+          children: const [
+            DurationRadioPicker(),
+            SizedBox(
+              height: 36,
+            ),
+            GroundTitleTextField(),
+          ],
         ),
-        body: Center(
-          child: Column(
-            children: const [
-              DurationRadioPicker(),
-              SizedBox(
-                height: 36,
+      ),
+      bottomNavigationBar: Container(
+        color: Colors.transparent,
+        height: 300,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            PrimaryElevatedButton(
+              isActive: isValid,
+              onPressed: () {
+                handlePostGround(context);
+              },
+              child: const Text(
+                '다음',
+                style: TextStyle(fontSize: 24),
               ),
-              GroundTitleTextField(),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Container(
-          color: Colors.transparent,
-          height: 300,
-          width: double.infinity,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              PrimaryElevatedButton(
-                isActive: isValid,
-                onPressed: () {
-                  handlePostGround(context);
-                },
-                child: const Text(
-                  '다음',
-                  style: TextStyle(fontSize: 24),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

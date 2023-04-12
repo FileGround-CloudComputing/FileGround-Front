@@ -6,6 +6,8 @@ import 'infrastructure/providers/authProvider.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'presentation/theme/colorScheme.dart';
+
 // DotEnv dotenv = DotEnv() is automatically called during import.
 // If you want to load multiple dotenv files or name your dotenv object differently, you can do the following and import the singleton into the relavant files:
 // DotEnv another_dotenv = DotEnv()
@@ -36,11 +38,8 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: router,
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: Colors.transparent,
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
     );
   }
 }

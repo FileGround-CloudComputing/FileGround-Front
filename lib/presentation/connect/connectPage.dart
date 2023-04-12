@@ -10,19 +10,16 @@ class ConnectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    return Padding(
-      padding: getPagePadding(),
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: BoldText(
-            '그라운드 좌표 입력',
-            color: color.onBackground,
-          ),
+        title: BoldText(
+          '그라운드 좌표 입력',
+          color: color.onBackground,
         ),
-        body: Numpad(),
       ),
+      body: Numpad(),
     );
   }
 }

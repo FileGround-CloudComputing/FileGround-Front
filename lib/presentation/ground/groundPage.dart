@@ -71,38 +71,41 @@ class _GroundPageState extends ConsumerState<GroundPage> {
     final isLoading =
         ref.watch(groundViewModelProvider.select((value) => value.isLoading));
     if (isLoading) {
-      return CircularProgressIndicator();
+      return const Center(child: CircularProgressIndicator());
     }
     final color = Theme.of(context).colorScheme;
-    return Padding(
-      padding: getPagePadding(),
-      child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            title: BoldText(
-              '그라운드 좌표 입력',
-              color: color.onBackground,
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (_) {
-                      return ShareModal(groundId: widget.groundId);
-                    },
-                  );
-                },
-                icon: Icon(Icons.share),
-              ),
-            ],
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: BoldText(
+            '그라운드 좌표 입력',
+            color: color.onBackground,
           ),
-          body: Column(
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                ref.read(groundViewModelProvider.notifier).imagePick();
+              },
+              icon: Icon(Icons.upload),
+            ),
+            IconButton(
+              onPressed: () {
+                ref
+                    .read(groundViewModelProvider.notifier)
+                    .openShareModal(context: context);
+              },
+              icon: Icon(Icons.share),
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               PhotosGrid(),
             ],
-          )),
-    );
+          ),
+        ));
   }
 }
