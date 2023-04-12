@@ -7,45 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../domain/models/ground.dart';
-
-class Some extends ConsumerWidget {
-  const Some({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final ground =
-        ref.watch(groundViewModelProvider.select((value) => value.ground));
-    return Text(ground.toString());
-  }
-}
-
-class PhotosGrid extends ConsumerWidget {
-  const PhotosGrid({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final photos = ref
-        .watch(groundViewModelProvider.select((value) => value.ground!.photos));
-    return GridView.count(
-      shrinkWrap: true,
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      crossAxisCount: 2,
-      children: [
-        ...photos.map(
-          (photo) => Image.network(
-            photo.thumbnail,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ],
-    );
-  }
-}
+import 'components/photosGrid.dart';
 
 class GroundPage extends ConsumerStatefulWidget {
   final String groundId;
@@ -73,12 +35,14 @@ class _GroundPageState extends ConsumerState<GroundPage> {
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
+    final title = ref
+        .watch(groundViewModelProvider.select((value) => value.ground!.title));
     final color = Theme.of(context).colorScheme;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: BoldText(
-            '그라운드 좌표 입력',
+            title,
             color: color.onBackground,
           ),
           centerTitle: true,

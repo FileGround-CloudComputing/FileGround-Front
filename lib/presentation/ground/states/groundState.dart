@@ -8,6 +8,7 @@ class GroundState with _$GroundState {
   const factory GroundState({
     Ground? ground,
     @Default(true) bool isLoading,
-    @Default([]) List<Ground> selectedGrounds,
+    @Default(false) bool isSelecting,
+    @Default(0) int selectCount,
   }) = _GroundState;
 }

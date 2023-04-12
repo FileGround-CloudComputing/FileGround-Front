@@ -16,6 +16,7 @@ class Photo with _$Photo {
     required String uploaderName,
     @Default(false) bool isDownloaded,
     @Default(false) bool isUploaded,
+    @Default(false) bool isSelected,
   }) = _Photo;
 
   factory Photo.fromJson(Map<String, dynamic> json) => _$PhotoFromJson(json);
