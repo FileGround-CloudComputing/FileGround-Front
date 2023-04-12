@@ -66,16 +66,24 @@ class MainPage extends ConsumerWidget {
             const SizedBox(
               height: 16,
             ),
-            RoundedSurfaceInk(
-              width: double.infinity,
-              child: Column(
-                children: const [
-                  IconTitleDesc(
-                    icon: Icons.coffee,
-                    title: '생성 내역',
-                  ),
-                  GroundsList(),
-                ],
+            const Expanded(
+              child: RoundedSurfaceInk(
+                width: double.infinity,
+                child: CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      toolbarHeight: 80,
+                      pinned: true,
+                      flexibleSpace: IconTitleDesc(
+                        icon: Icons.coffee,
+                        title: '생성 내역',
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: GroundsList(),
+                    )
+                  ],
+                ),
               ),
             ),
           ],

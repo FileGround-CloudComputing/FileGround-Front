@@ -1,7 +1,6 @@
 import 'package:file_ground_front/domain/failure/failure.dart';
 import 'package:file_ground_front/infrastructure/providers/groundProvider.dart';
 import 'package:file_ground_front/presentation/make/states/makeStates.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -28,6 +27,7 @@ class MakePageViewModel extends StateNotifier<MakeState> {
   void handlePostGround(BuildContext context) async {
     final res = await ref.read(groundUseCaseProvider.notifier).addGround(
           Ground(
+            id: "",
             title: state.groundTitle,
             expiresIn: DateTime.now().add(state.groundDuration),
           ),

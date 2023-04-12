@@ -6,6 +6,8 @@ part 'groundState.freezed.dart';
 @freezed
 class GroundState with _$GroundState {
   const factory GroundState({
-    required Ground ground,
+    Ground? ground,
+    @Default(true) bool isLoading,
+    @Default([]) List<Ground> selectedGrounds,
   }) = _GroundState;
 }

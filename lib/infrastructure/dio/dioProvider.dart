@@ -4,10 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/models/session.dart';
 import '../providers/authProvider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+final serverUrl = dotenv.env['SERVER_URL'] ?? "http://localhost:8080";
 final dioProvider = Provider<Dio>((Ref ref) {
   return Dio(BaseOptions(
-    baseUrl: 'http://localhost:8000',
+    baseUrl: serverUrl,
     headers: {'Content-Type': 'application/json'},
     connectTimeout: const Duration(seconds: 2),
   ));
@@ -15,7 +17,7 @@ final dioProvider = Provider<Dio>((Ref ref) {
 
 final dioAuthProvider = Provider<Dio>((Ref ref) {
   final dio = Dio(BaseOptions(
-    baseUrl: 'http://localhost:8000',
+    baseUrl: serverUrl,
     headers: {'Content-Type': 'application/json'},
     connectTimeout: const Duration(seconds: 2),
   ));

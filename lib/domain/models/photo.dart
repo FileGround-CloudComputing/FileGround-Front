@@ -8,11 +8,12 @@ part 'photo.freezed.dart';
 @freezed
 class Photo with _$Photo {
   const factory Photo({
-    required int id,
-    required String title,
+    required String id,
     required String src,
     required String thumbnail,
     required String uploadedAt,
+    required String uploaderId,
+    required String uploaderName,
     @Default(false) bool isDownloaded,
     @Default(false) bool isUploaded,
   }) = _Photo;

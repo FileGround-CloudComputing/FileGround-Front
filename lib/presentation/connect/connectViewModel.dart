@@ -30,6 +30,7 @@ class ConnectViewModel extends StateNotifier<ConnectState> {
           successCallback(ground, context);
         },
         error: (error) {
+          print(error);
           state = state.copyWith(isError: true);
         },
       );
@@ -38,7 +39,7 @@ class ConnectViewModel extends StateNotifier<ConnectState> {
 
   void successCallback(Ground ground, BuildContext context) {
     state = state.copyWith(isError: false, currentGround: ground);
-    context.go('/${ground.coordinate!}', extra: ground);
+    context.push('/${ground.id!}', extra: ground);
   }
 
   void handleRemove() {
